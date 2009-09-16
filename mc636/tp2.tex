@@ -1,0 +1,288 @@
+\documentclass[conference,brazil,english]{sbatex}
+\usepackage[latin1]{inputenc}
+\usepackage{ae}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[small,bf]{caption}
+
+%
+% LaTeX2e class SBATeX
+%
+% Versão 1.0 alpha
+%   Walter Fetter Lages
+%   w.fetter@ieee.org
+%
+% Este arquivo cba.tex é uma adaptação do arquivo revista.tex,
+% Versão: 1.0 alpha, desenvolvido por Maurício C. de Oliveira,
+% mcdeoliveira@ieee.org.
+%
+% As adaptações fazem com que, por default, sejam utilizadas
+% as opções adequadas para o formato do CBA ou SBAI, ao contrário do arquivo
+% revista.tex, que, por default, utiliza opções adequadas para o formato
+% da Revista da SBA.
+%
+%
+% --------------------------------------------------
+%
+% Para compilar este exemplo use a seqüência de comandos:
+%
+%     latex cba
+%     bibtex cba
+%     latex cba
+%     latex cba
+%
+% Para gerar um arquivo Postscript (.ps):
+%
+%     dvips -t a4 cba
+%
+% Para gerar um arquivo Portable Document Format (.pdf):
+%
+%     dvips -Ppdf -t a4 cba
+%     ps2pdf -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -dCompatibilityLevel=1.2 -sPAPERSIZE=a4 cba.ps
+%
+
+% --------------------------------------------------
+%  Estes comandos são necessários apenas para a
+%  a geração deste artigo exemplo. Eles não fazem
+%  parte do estilo SBATeX.
+% --------------------------------------------------
+\makeatletter
+\def\verbatim@font{\normalfont\ttfamily\footnotesize}
+\makeatother
+\usepackage{amsmath}
+% --------------------------------------------------
+
+
+\begin{document}
+
+% CABEÇALHO
+
+\title{Verificação e Validação de Software - Trabalho Prático 2}
+
+\author{Lucas Tanure}{ltanure@gmail.com}
+\address{RA06xxxx - Ciência da Computação 2006}
+
+\author{Rafael Fonseca dos Santos}{fonsecasantos.rafael@gmail.com}
+\address{RA072146 - Ciência da Computação 2007}
+
+\author{Victor Matheus de Araujo Oliveira}{victormatheus@gmail.com}
+\address{RA072589 - Ciência da Computação 2007}
+
+% Com a opção 'journal' pode-se definir
+%\volume{X}
+%\numero{X}
+%\mes{Jan e Fev}
+%\ano{2010}
+% Caso contrário você verá um irritante aviso de
+% que estes valores não foram definidos.
+
+% \twocolumn apenas para conference
+\twocolumn[
+
+\maketitle
+
+\selectlanguage{brazil}
+\begin{abstract}
+    Nesse trabalho para a disciplina MC636 (ministrada pela prof.
+    Eliane Martins) fazemos uma análise das métricas coletadas para o programa
+    \emph{JDwonloader} baseada nos limites para as métricas CK (Chidamber e
+    Kemerer) e LK (Lorenz e Kidd).
+\end{abstract}
+
+\keywords{Validação, Verificação, Métricas, CK, LK, Software}
+]
+
+% CONTRIBUIÇÃO
+
+\selectlanguage{brazil}
+
+\section{Introdução}
+A medição é um elemento essencial do gerenciamento, pois, segundo Tom DeMarco
+(engenheiro de software norte-americano) ``Não se pode controlar o que não se
+pode medir''. Entre seus objetivos podemos citar: aumento da satisfação do
+cliente, diminuição do esforço e tempo em atividades de manutenção e redução de
+falhas.
+
+Visto que profissionais modernos de desenvolvimento de software tendem a
+assinalar que métricas ingênuas e simplistas podem causar mais dano que bem,
+faz-se necessário ter conhecimento sobre as várias métricas existentes
+e, mais importante, saber analisá-las e relacioná-las correta e
+significativamente.
+
+Tendo isso em mente, o objetivo desse trabalho é o de coletar
+especificadas métricas e analisá-las segundo limites propostos pelas
+métricas CK (Chidamber e Kemerer) e LK (Lorenz e Kidd). Será
+apresentado um sumário com as métricas obtidas, bem como suas devidas
+análises junta e separadamente
+
+\section{Aplicação das métricas}
+
+\subsection{As métricas consideradas}
+Para esse trabalho, consideramos os seguintes limites para as devidas métricas:
+\begin{itemize}
+    \item Limites para as métricas CK:
+        \begin{itemize}
+            \item Número de métodos incluindo construtores e destrutores (NOM):
+                $<=$ 20 (ideal), $<=$ 10 (aceitável).
+            \item Métodos ponderados por classe (WMC): $<=$ 25 (ideal), $<=$ 40
+                (aceitável).
+            % Colocar aqui uma nota de rodapé explicando que as duas metricas
+            % seguintes foram obtidas com o uso de outro programa.
+            \item Resposta para uma classe (RFC): $<=$ 50.
+            \item Acoplamento entre classes de objetos (CBO): $<=$ 5.
+            \item Profundidade da árvore de herança (DIT): $<$ 2 predomina
+                    herança sub-utilizada; $>$ 5 predomina herança muito utilizada mas
+                    complexidade elevada.
+        \end{itemize}
+
+    \item Limites para as métricas LK:
+        \begin{itemize}
+            \item Tamanho médio dos métodos de uma classe (MLOC): $<=$ 28 LdC.
+            \item NOM: $<=$ 20.
+            \item Número médio de atributos por classe (NOF): $<=$ 6.
+            \item DIT: $<=$ 6;
+        \end{itemize}
+\end{itemize}
+
+\subsection{Sumário das métricas:}
+As medições coletadas estão representadas sumariamente na tabela a seguir:
+
+\begin{table}[H]
+\tiny
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Métrica & Medida obtida & Desvio-padrão & Mínimo & Máximo   \\ \hline \hline
+NOM     & 6.85          & 8.77          & 0      & 93       \\ \hline
+WMC     & 19.68         & 30.91         & 0      & 348      \\ \hline
+RFC     & 26.21         & 31.6          & 0      & 331      \\ \hline
+CBO     & 6.32          & 6.05          & 0      & 57       \\ \hline
+DIT     & 2.72          & 1.68          & 1      & 8        \\ \hline
+MLOC    & 8.93          & 19.35         & 0      & 474      \\ \hline
+NOF     & 2.04          & 4.76          & 0      & 76       \\ \hline
+\end{tabular}
+\caption{Tabela com as métricas coletadas}
+\end{table}
+
+Através desses dados, obtivemos o seguinte gráfico (Gráfico \ref{graf:sumario})
+para facilitar a análise:
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.32]{sumario.png}
+\caption{Sumário com as métricas coletadas}
+\label{graf:sumario.png}
+\end{figure}
+
+\subsection{Análise das métricas coletadas}
+
+% Colocar aqui uma nota de rodapé explicando que só pegamos algumas amostras
+% para fazer o gráfico, visto que o programa possui muitas classes e metodos.
+Analisando cada métrica separadamente, temos que:
+
+\begin{itemize}
+    \item DIT: notamos que, na média, as classes do programa em questão estão a
+    uma boa profundidade na árvore de herança com relação aos limites para as
+    duas métricas, obtendo assim vantagem com o reuso de métodos herdados e
+    facilidade de manutenção.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{dit.png}
+    \caption{graf:dit.png}
+    \end{figure}
+
+    \item WMC: o valor obtido está dentro do considerado ideal, isto é, os
+    métodos estão bem distribuídos entre as classes significando que é fácil dar
+    manutenção às classes e reusá-las.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{wmc.png}
+    \caption{graf:wmc.png}
+    \end{figure}
+
+    \item CBO: o código apresenta uma diversidade muito grande nessa métrica,
+    enquanto que a maioria das classes apresenta baixo acoplamento, existe um
+    pequeno número que possui grande acoplamento, o que mostra que o
+    \emph{design} destas não foi feito de modo modular e encapsulado o que
+    dificultará futuros testes e/ou reuso delas.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{cbo.png}
+    \caption{graf:cbo.png}
+    \end{figure}
+
+    \item MLOC: os métodos, na média, apresentam em geral um baixo número de
+    linhas de código, mostrando que as funcionalidades de cada método são bem
+    definidas e separadas das de outros, o que é um bom princípio de
+    \emph{design}. Contudo, há algumas classes que ultrapassam incrivelmente o
+    limite considerado razoável (com máximo de 474 linhas de código, por
+    exemplo).
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{mloc.png}
+    \caption{graf:mloc.png}
+    \end{figure}
+
+    \item NOF: existe um baixo número de atributos para cada classe na média
+    tornando assim a informação do sistema contida nas relações entre os objetos
+    e não nos atributos das classes.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{nof.png}
+    \caption{graf:nof.png}
+    \end{figure}
+
+    \item RFC: indica o número de métodos ou atributos que uma classe pode usar
+    em resposta a uma mensagem. No programa, o valor está em torno de 26, um
+    valor razoável, porém chega a 331, evidenciando assim a vulnerabilidade
+    dessas classes a qualquer mudança no código.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{rfc.png}
+    \caption{graf:rfc.png}
+    \end{figure}
+
+    \item NOM: indica o número de métodos por classe. Também neste caso o código
+    se comporta bem na média, fora alguns poucos casos que ultrapassam bastante
+    o limite aceitável para a métrica; o problema com isso é o prejuízo do
+    encapsulamento do código, bem como sua manutenção, uma vez que essas classes
+    agregam diversas funcionalidades que poderiam estar divididas entre várias
+    outras classes.
+    \begin{figure}[H]
+    \center
+    \includegraphics[scale=0.32]{nom.png}
+    \caption{fig:nom.png}
+    \end{figure}
+
+\end{itemize}
+
+Um ponto importante a se notar nas métricas obtidas é o alto valor do desvio
+padrão. Isso nos diz que os dados estão bem espalhados em relação a média
+obtida (o valor mínimo para a métrica é quase sempre 0 e valor máximo é
+sempre bem alto).
+
+Avaliando agora todas as métricas em conjunto, bem como levando em consideração
+os mínimos e máximos encontrados para cada uma delas, podemos afirmar que o
+software considerado, \emph{JDownload}, tem sérios problemas de design. Por um
+lado, os desenvolvedores tomaram cuidado para não aprofundar demais as classes em
+muitas heranças (a medida máxima para DIT foi 8, próximo dos limites das métricas
+CK e LK de 5 e 6, respectivamente). Contudo, ter máximos tão altos para a maioria
+das métricas significa que poucas classes e métodos retém toda a funcionalidade do
+sistema. Estar nessa condição implicará em dificuldades futuras para manutenção e
+reuso das classes do software.
+
+Embora não se possa inferir diretamente dos resultados sumarizados obtidos, uma
+análise mais cuidadosa dos dados mostra que, na maioria, as classes com menor
+número de métodos possuíam os métodos com mais linhas de código; essas são as
+classes para as quais se deve dar maior atenção na fase de testes do software.
+
+Por fim, concluímos que, apesar de se ter uma boa idéia geral do software através
+do resultado médio obtido para as métricas, é imprescindível que se leve em conta
+o valor do desvio-padrão obtido, o que pode nos direcionar para pontos críticos do
+sistema, inicialmente escondidos pela sumarização das métricas.
+
+%FIXME: colocar link para programa ckjm na bibliografia?
+\begin{itemize}
+% BIBLIOGRAFIA
+\bibliographystyle{acm}
+\bibliography{exemplo}
+\end{document}
